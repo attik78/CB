@@ -33,17 +33,22 @@ DROP DATABASE {0}
 ################################
 
 
-
+echo ("Trying to get database {0} on server {1}" -f $databaseName,$server)
 $db = Get-SqlDatabase  -Name $databaseName -ServerInstance $server -ErrorAction SilentlyContinue
 
 if ($db -ne $null)
 {
+	echo ("Database {0} already exists on server {1}" -f $databaseName,$server)
+	echo ("Backing up database {0} to {1}" -f $databaseName,$backupPath)
 	Backup-SqlDatabase -Database $databaseName -BackupAction Database -BackupFile $backupPath -ServerInstance $server -NoRecovery -NoRewind  -SkipTapeHeader -Initialize
+	echo "Backup has been done"
+	echo ("Droping database {0} on servee {1}" -f $databaseName,$server)
 	Invoke-Sqlcmd -Database master -ServerInstance $server -Query $DropCmd
 
 }
 
 # when you create DB in real life there are many params which should be setup (e.g. file location)
+echo ("Creating database {0} on servee {1}" -f $databaseName,$server)
 Invoke-Sqlcmd -Database master -ServerInstance $server -Query ("CREATE DATABASE {0}"  -f $databaseName)
 Invoke-Sqlcmd -Database $databaseName -ServerInstance $server -Query $tablesCmd
 
@@ -75,15 +80,17 @@ copy  ($serviceBinSource + "*")  $serviceBinDest
 
 if ($service -eq $null)
 {
-	echo "Service doesn't not exist and will be installed"
+	echo ("Service {0} doesn't not exist and will be installed" -f $service.Name )
 	New-Service -BinaryPathName ($serviceRunPath + "SimpleService.exe") -Name $serviceName -StartupType Automatic -ErrorAction SilentlyContinue 
 	$service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue	
 }
 
 if (Test-Path ($serviceRunPath))
 {
+echo ("Existing junction {0} will be deleted" -f $serviceRunPath )
 cmd /C ("rmdir {0}" -f $serviceRunPath)
 }
+echo ("Creating new junction {0} targeting {1}" -f $serviceRunPath,$serviceBinDest )
 cmd /C ("mklink /J {0} {1}" -f $serviceRunPath,$serviceBinDest)
 $service.Start()
 	
