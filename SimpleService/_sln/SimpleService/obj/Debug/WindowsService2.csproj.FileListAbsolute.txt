@@ -1,0 +1,2 @@
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\bin\Debug\WindowsService2.exe.config
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\bin\Debug\SimpleService.exe.config

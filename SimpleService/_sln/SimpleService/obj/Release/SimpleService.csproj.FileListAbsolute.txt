@@ -1,0 +1,7 @@
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\bin\Release\SimpleService.exe.config
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\bin\Release\SimpleService.exe
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\bin\Release\SimpleService.pdb
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\bin\Release\log4net.dll
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\bin\Release\log4net.xml
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\obj\Release\SimpleService.exe
+c:\users\szaloa\documents\visual studio 2013\Projects\WindowsService2\WindowsService2\obj\Release\SimpleService.pdb
